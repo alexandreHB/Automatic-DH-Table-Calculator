@@ -50,7 +50,14 @@ int main()
 
                     //CHANGE OF SOLID'S TEXTURE
                     if (interface.events.key.keysym.sym == SDLK_c && solid_selected != -2)
-                        robot.listeSolid[solid_selected+1]->changeTexture(interface.pRenderer);                        
+                        robot.listeSolid[solid_selected+1]->changeTexture(interface.pRenderer);  
+
+                    //COMPUTE PRODUCT MATRIX
+                    if (interface.events.key.keysym.sym == SDLK_n && solid_selected != -2)
+                    {
+                        robot.listeSolid[solid_selected+1]->init_matrix();
+                        robot.listeSolid[solid_selected+1]->printMatrix();
+                    }
                     break;
                     
 

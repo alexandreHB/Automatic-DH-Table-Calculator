@@ -52,6 +52,11 @@ class Solid
         void computeD(shared_ptr<Solid> next_solid);
         void computeA(shared_ptr<Solid> next_solid);
         virtual void compute_One_Line_DH(shared_ptr<Solid> next_solid){}
+
+        // homegeneous transformation matrix
+        void init_matrix();
+        void printMatrix(); 
+        //void matrixProduct(shared_ptr<Solid> next_solid)();
 };
 
 

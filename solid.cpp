@@ -180,3 +180,83 @@ void Solid::computeA(shared_ptr<Solid> next_solid)
 }
 
 
+
+void Solid::init_matrix() 
+{
+    //string homogeneous_transformation[4][4];
+
+    //1st colonn
+    homogeneous_transformation[0][0] = "c" + to_string(this->getNumSolid()+1);
+    homogeneous_transformation[1][0] = "s" + to_string(this->getNumSolid()+1);
+    homogeneous_transformation[2][0] = "0";
+    homogeneous_transformation[3][0] = "0";
+
+
+    //2nd and 3rd
+    if(this->alpha_i == "0")
+    {
+        homogeneous_transformation[0][1] = "-s" + to_string(this->getNumSolid()+1);
+        homogeneous_transformation[1][1] = "c" + to_string(this->getNumSolid()+1);
+        homogeneous_transformation[2][1] = "0";
+
+        homogeneous_transformation[0][2] = "0";
+        homogeneous_transformation[1][2] = "0";
+        homogeneous_transformation[2][2] = "1";
+    }
+    else if(this->alpha_i == "+PI/2")
+    {
+        homogeneous_transformation[0][1] = "0";
+        homogeneous_transformation[1][1] = "0";
+        homogeneous_transformation[2][1] = "1";
+
+        homogeneous_transformation[0][2] = "s" + to_string(this->getNumSolid()+1);
+        homogeneous_transformation[1][2] = "-c" + to_string(this->getNumSolid()+1);
+        homogeneous_transformation[2][2] = "0";
+    }
+    else if(this->alpha_i == "-PI/2")
+    {
+        homogeneous_transformation[0][1] = "0";
+        homogeneous_transformation[1][1] = "0";
+        homogeneous_transformation[2][1] = "-1";
+
+        homogeneous_transformation[0][2] = "-s" + to_string(this->getNumSolid()+1);
+        homogeneous_transformation[1][2] = "c" + to_string(this->getNumSolid()+1);
+        homogeneous_transformation[2][2] = "0";
+    }
+    homogeneous_transformation[3][1] = "0";
+    homogeneous_transformation[3][2] = "0";
+
+
+    //4th
+    homogeneous_transformation[0][3] = this->a_i + "c" + to_string(this->getNumSolid()+1);
+    homogeneous_transformation[1][3] = this->a_i + "s" + to_string(this->getNumSolid()+1);
+    homogeneous_transformation[2][3] = this->d_i;
+    homogeneous_transformation[3][3] = "1";
+}
+
+
+void Solid::printMatrix() 
+{
+    for(int i = 0; i < 4; i++)
+    {
+        cout << "|";
+        for (int j = 0; j < 4; j++)
+        {
+            cout << "   " << homogeneous_transformation[i][j];
+            for(int k = 0; k < 8 - homogeneous_transformation[i][j].size(); k++)
+                cout << " ";
+        }
+        cout << "| " << endl;
+    }
+}
+
+
+/*
+void Solid::matrixProduct(shared_ptr<Solid> next_solid)
+{
+    for(int i = 0; i < 4; i++)
+        for(int j = 0; j < 4; j++)
+            for(int k = 0; k < 4; k++)
+                this->homogeneous_transformation[i][j] = this->homogeneous_transformation[i][j] + next_solid->homogeneous_transformation[k][j]
+}
+*/
