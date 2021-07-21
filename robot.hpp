@@ -22,6 +22,8 @@ class Robot
         void computeDH();
         void printTable();
 
+        void computeMatrix();
+        void computeGeometricalModel();
 
 };
 

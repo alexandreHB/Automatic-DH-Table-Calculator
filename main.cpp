@@ -55,9 +55,16 @@ int main()
                     //COMPUTE PRODUCT MATRIX
                     if (interface.events.key.keysym.sym == SDLK_n && solid_selected != -2)
                     {
-                        robot.listeSolid[solid_selected+1]->init_matrix();
+                        robot.listeSolid[solid_selected+1]->computeMatrix();
                         robot.listeSolid[solid_selected+1]->printMatrix();
                     }
+
+                    /*//TEST
+                    if (interface.events.key.keysym.sym == SDLK_t)
+                    {
+                        robot.computeGeometricalModel();
+                    }
+                    */
                     break;
                     
 

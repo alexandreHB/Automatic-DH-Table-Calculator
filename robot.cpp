@@ -28,11 +28,9 @@ Robot::~Robot()
 
 void Robot::updateNumeroSolid() 
 {
-    for(int i = 0; i <listeSolid.size(); i++)
+    for(int i = 0; i < listeSolid.size(); i++)
         listeSolid[i]->getNumSolid() = i-1;
 }
-
-
 
 
 void Robot::display(SDL_Renderer* pRenderer) 
@@ -61,13 +59,12 @@ void Robot::display(SDL_Renderer* pRenderer)
 }
 
 
+
 void Robot::computeDH() 
 {
     for(int i = 1; i < listeSolid.size()-1; i++)
         listeSolid[i]->compute_One_Line_DH(listeSolid[i+1]);
 }
-
-
 
 
 void Robot::printTable() 
@@ -80,35 +77,34 @@ void Robot::printTable()
     for(int i = 1; i <  listeSolid.size()-1; i++)
     {
         cout << " " << i << " |";
-
-        //theta_i 
-        cout << "   " << listeSolid[i]->theta_i;
-        for(int k = 0; k < 8 - listeSolid[i]->theta_i.size(); k++)
-            cout << " ";
-        cout << "|";
-
-        // d_i
-        cout << "   " << listeSolid[i]->d_i;
-        for(int k = 0; k < 8 - listeSolid[i]->d_i.size(); k++)
-            cout << " ";
-        cout << "|";
-
-        //a_i
-        cout << "   " << listeSolid[i]->a_i;
-        for(int k = 0; k < 8 - listeSolid[i]->a_i.size(); k++)
-            cout << " ";
-        cout << "|";
-
-        //alpha_i
-        cout << "   " << listeSolid[i]->alpha_i;
-        for(int k = 0; k < 8 - listeSolid[i]->alpha_i.size(); k++)
-            cout << " ";
-        cout << "|" << endl;
+        listeSolid[i]->printOneLineDH();
     }
 
     cout << "____________________________________________________" << endl;
 }
 
+
+
+
+void Robot::computeMatrix()
+{
+    for(int i = 1; i < listeSolid.size()-1; i++)
+        listeSolid[i]->computeMatrix();
+}
+
+
+/*
+void Robot::computeGeometricalModel() 
+{
+    this->computeMatrix();
+    for(int i = 1; i < listeSolid.size()-1; i++)
+    {
+        cout << "___________________________________________________________________" << endl;
+        cout << "Homogeneous Transformation Matrix from the solid " << i-1 << " to the solid " << i << " : \n" << endl;
+        listeSolid[i]->printMatrix();
+    }
+}
+*/
 
 
 

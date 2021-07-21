@@ -1,7 +1,16 @@
 TODO LIST
 
 related to the code :  
-* matrix calcul
+
+1) retravailler sur l'initialisation de la matrice d'un solide(elle est pas tjrs correcte)
+    j'pense faut regler le cas "Qi+-PI/2"
+
+2) retravailler sur la scalabilté des petites fonctions pour les matrices
+
+3) voir si dans le destructeur de solide faut pas delete la matrice
+
+
+Bonus : 
 * make a gloabl tour of the code for the memory leaks and check with valgrind
 *  main < 100 lignes ?
     * put events handling in other file than main ? (in interface ? or an other class)
