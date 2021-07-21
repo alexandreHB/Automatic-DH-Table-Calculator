@@ -1,0 +1,127 @@
+<mxfile>
+    <diagram id="_2LkoAXAyAxZuH7hCQY6" name="Page-1">
+        <mxGraphModel dx="2109" dy="703" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Displayable&#10;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+                    <mxGeometry x="-180" y="280" width="360" height="248" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="# angleTexture : int&#10;# path : string&#10;# surface :  SDL_Surface*&#10;# texture : SDL_Texture*&#10;# rectangle : SDL_Rect" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="2" vertex="1">
+                    <mxGeometry y="26" width="360" height="124" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="2" vertex="1">
+                    <mxGeometry y="150" width="360" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="+ Displayable(path : string, posX : int, posY : int, width : int,&#10; height : int, pRenderer : SDL_Renderer*) : Displayable&#10;&#10;+ display(pRenderer :SDL_Renderer* ) : void&#10;+ isMouseOn(sourisX : int, sourisY : int) : bool" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="2" vertex="1">
+                    <mxGeometry y="158" width="360" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Robot" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+                    <mxGeometry x="370" y="100" width="340" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="+ listSolide : Vector&lt;Solid&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="6" vertex="1">
+                    <mxGeometry y="26" width="340" height="124" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="6" vertex="1">
+                    <mxGeometry y="150" width="340" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="+ Robot (pRenderer : SDL_Renderer*) : Robot&#10;+ computeDH() : void  &#10;+ printTable() : void&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="6" vertex="1">
+                    <mxGeometry y="158" width="340" height="92" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="Solide" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+                    <mxGeometry x="270" y="410" width="490" height="364" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="# numeroTexture : int&#10;# numeroSolid : int&#10;# repere : Repere*&#10;# display : Displayable*&#10;+ theta_i :string&#10;+ d_i : string&#10;+ a_i : string&#10;+ alpha_i : string&#10;+ compteur : static int&#10;+ paths : string[]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="14" vertex="1">
+                    <mxGeometry y="26" width="490" height="154" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="14" vertex="1">
+                    <mxGeometry y="180" width="490" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="+ display(pRenderer : SDL_Render*) : void&#10;+ changeTexture(pRenderer : SDL_Renderer*) : void&#10;+ move(x : int, y : int)&#10;&#10;+ computeAlpha(previous_solid : shared_ptr&lt;Solid&gt;)&#10;+ computeTheta(previous_solid : shared_ptr&lt;Solid&gt;)&#10;+ computeD(previous_solid : shared_ptr&lt;Solid&gt;)&#10;+ computeA(previous_solid : shared_ptr&lt;Solid&gt;)&#10;+ computeOneLineDH(previous_solid : shred_ptr&lt;Solid&gt;)&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="14" vertex="1">
+                    <mxGeometry y="188" width="490" height="176" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Repère" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+                    <mxGeometry x="-140" y="600" width="320" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="# oX : int&#10;# oY : int&#10;# angleX : float&#10;# angleZ : float&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="19" vertex="1">
+                    <mxGeometry y="26" width="320" height="124" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="19" vertex="1">
+                    <mxGeometry y="150" width="320" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="+ display(pRenderer SDL_Renderer* ) : void &#10;+ rotateAxis(nameAxis  : char, angleRadian : float) : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="19" vertex="1">
+                    <mxGeometry y="158" width="320" height="92" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="Pivot" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+                    <mxGeometry x="230" y="850" width="350" height="246" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="&#10;&#10;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="23" vertex="1">
+                    <mxGeometry y="26" width="350" height="124" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="23" vertex="1">
+                    <mxGeometry y="150" width="350" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="+ Pivot (posX : int, posY : int, width : int, height : int, &#10;pRenderer SDL_Renderer*) : Pivot&#10;&#10;+ computeOneLineDH(previous_solid : shared_ptr&lt;Solid&gt;)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="23" vertex="1">
+                    <mxGeometry y="158" width="350" height="88" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="Sliding" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+                    <mxGeometry x="610" y="850" width="350" height="238" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value=" &#10; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="27" vertex="1">
+                    <mxGeometry y="26" width="350" height="124" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="27" vertex="1">
+                    <mxGeometry y="150" width="350" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="+ Sliding (posX : int, posY : int, width : int, height : int, &#10;pRenderer SDL_Renderer*) : Sliding&#10;&#10;+ computeOneLineDH(next_solid : shared_ptr&lt;Solid&gt;)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="27" vertex="1">
+                    <mxGeometry y="158" width="350" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;entryX=0.485;entryY=1.001;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="23" target="17" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="520" y="780" as="sourcePoint"/>
+                        <mxPoint x="680" y="780" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="32" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.608;entryY=0.99;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="27" target="17" edge="1">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="390" y="820" as="sourcePoint"/>
+                        <mxPoint x="490" y="730" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="33" value="n" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;exitX=0.439;exitY=1.009;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="9" target="14" edge="1">
+                    <mxGeometry x="-0.7103" y="21" relative="1" as="geometry">
+                        <mxPoint x="490" y="480" as="sourcePoint"/>
+                        <mxPoint x="650" y="480" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="37" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;align=left;verticalAlign=bottom;entryX=1.008;entryY=0.79;entryDx=0;entryDy=0;entryPerimeter=0;exitX=-0.01;exitY=0.406;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="15" target="3" edge="1">
+                    <mxGeometry x="-0.6345" y="13" relative="1" as="geometry">
+                        <mxPoint x="480" y="660" as="sourcePoint"/>
+                        <mxPoint x="640" y="660" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="38" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;align=left;verticalAlign=bottom;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=-0.005;exitY=0.614;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="15" target="20" edge="1">
+                    <mxGeometry x="-0.8493" y="-13" relative="1" as="geometry">
+                        <mxPoint x="383.8399999999998" y="584.9299999999997" as="sourcePoint"/>
+                        <mxPoint x="120.0000000000001" y="473.99800000000016" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="40" value="interface" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="120" width="340" height="530" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="+ pWindow : SDL_Window*&#10;+ pRenderer : SDL_Renderer&#10;+ events : SDL_Event&#10;&#10;+ textPivot : SDL_Surface*&#10;+ t_textPivot : SDL_Texture*&#10;+ rectTextPivot : SDL_Rect&#10; &#10;+ textGlissier : SDL_Surface*&#10;+ t_textGlissier : SDL_Texture*&#10;+ rectTextGlissier : SDL_Rect&#10;&#10;&#10;+ textAxeZ : SDL_Surface*&#10;+ t_textAxeZ : SDL_Texture*&#10;+ rectTextAxeZ : SDL_Rect&#10;&#10;&#10;+ textAxeX : SDL_Surface*&#10;+ t_textAxeX : SDL_Texture*&#10;+ rectTextAxeX : SDL_Rect&#10;&#10;+ garbage_button : Displayable*&#10;+ pivot_button : Displayable*&#10;+ sliding_button : Displayable*&#10;+ Go_button : Displayable*" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="40" vertex="1">
+                    <mxGeometry y="26" width="340" height="404" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="40" vertex="1">
+                    <mxGeometry y="430" width="340" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="+ Interface() : Interface&#10;+ display() : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="40" vertex="1">
+                    <mxGeometry y="438" width="340" height="92" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
