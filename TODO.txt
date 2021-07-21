@@ -1,0 +1,9 @@
+TODO LIST
+
+related to the code :  
+* matrix calcul
+* make a gloabl tour of the code for the memory leaks and check with valgrind
+*  main < 100 lignes ?
+    * put events handling in other file than main ? (in interface ? or an other class)
+    * try to put the deletion of a sold in the events handling (it will short the code and make it vissualy cleaner)
+
