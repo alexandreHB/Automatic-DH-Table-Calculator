@@ -60,14 +60,15 @@ void Robot::display(SDL_Renderer* pRenderer)
 
 
 
-void Robot::computeDH() 
+void Robot::computeDH_Table() 
 {
     for(int i = 1; i < listeSolid.size()-1; i++)
         listeSolid[i]->compute_One_Line_DH(listeSolid[i+1]);
 }
 
 
-void Robot::printTable() 
+
+void Robot::printDH_Table() 
 {
     cout << "****************************************************" << endl;
     cout << "                DH TABLE OF THE ROBOT               " << endl;
@@ -84,25 +85,28 @@ void Robot::printTable()
 }
 
 
-
-
-void Robot::computeMatrix()
+void Robot::computeMatrices()
 {
     for(int i = 1; i < listeSolid.size()-1; i++)
         listeSolid[i]->computeMatrix();
 }
 
+void Robot::printMatrices() 
+{
+    for(int i = 1; i < listeSolid.size()-1; i++)
+    {
+        cout << "___________________________________________________________" << endl;
+        cout << "Homogeneous Transformation Matrix from solid " << i-1 << " to solid " << i << " : \n" << endl;
+        listeSolid[i]->printMatrix();
+    }
+}
+
+
 
 /*
 void Robot::computeGeometricalModel() 
 {
-    this->computeMatrix();
-    for(int i = 1; i < listeSolid.size()-1; i++)
-    {
-        cout << "___________________________________________________________________" << endl;
-        cout << "Homogeneous Transformation Matrix from the solid " << i-1 << " to the solid " << i << " : \n" << endl;
-        listeSolid[i]->printMatrix();
-    }
+
 }
 */
 

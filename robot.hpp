@@ -19,10 +19,11 @@ class Robot
         void updateNumeroSolid();
         void display(SDL_Renderer* pRenderer);
 
-        void computeDH();
-        void printTable();
+        void computeDH_Table();
+        void printDH_Table();
 
-        void computeMatrix();
+        void computeMatrices();
+        void printMatrices();
         void computeGeometricalModel();
 
 };

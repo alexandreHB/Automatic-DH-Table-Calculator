@@ -54,10 +54,8 @@ int main()
 
                     //COMPUTE PRODUCT MATRIX
                     if (interface.events.key.keysym.sym == SDLK_n && solid_selected != -2)
-                    {
-                        robot.listeSolid[solid_selected+1]->computeMatrix();
                         robot.listeSolid[solid_selected+1]->printMatrix();
-                    }
+                    
 
                     /*//TEST
                     if (interface.events.key.keysym.sym == SDLK_t)
@@ -85,11 +83,14 @@ int main()
                             cout << "last solid selected  : " << solid_selected << endl;
                         }
 
-                    //COMPUTE DH TABLE
+                    //COMPUTATION 
                     if(interface.Go_button->isMouseOn(interface.events.button.x, interface.events.button.y))
                     {
-                        robot.computeDH();
-                        robot.printTable();
+                        robot.computeDH_Table();
+                        robot.printDH_Table();
+
+                        robot.computeMatrices();
+                        robot.printMatrices();
                     }
                     break;
 

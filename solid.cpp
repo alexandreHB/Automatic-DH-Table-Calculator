@@ -210,60 +210,81 @@ void Solid::printOneLineDH()
 
 void Solid::computeMatrix() 
 {
-    //1st colonn
-    homogeneous_transformation[0][0] = "c" + to_string(this->getNumSolid()+1);
-    homogeneous_transformation[1][0] = "s" + to_string(this->getNumSolid()+1);
+    string num = to_string(this->getNumSolid()+1);
+    string cosAlpha;
+    string sinAlpha;
+    string cosTheta;
+    string sinTheta;
+
+    // alpha value assignment
+    if(alpha_i == "0")
+    {
+        cosAlpha = "1";
+        sinAlpha = "0";
+    }
+    else if(alpha_i == "-PI/2")
+    {
+        cosAlpha = "0";
+        sinAlpha = "(-1)";
+    }
+    else if(alpha_i == "+PI/2")
+    {
+        cosAlpha = "0";
+        sinAlpha = "1";
+    }
+
+    //theta value assignment
+    if(theta_i == "0")
+    {
+        cosTheta = "1";
+        sinTheta = "0";
+    }
+    else if(theta_i == "-PI/2")
+    {
+        cosTheta = "0";
+        sinTheta = "(-1)";
+    }
+    else if(theta_i == "+PI/2")
+    {
+        cosTheta = "0";
+        sinTheta = "1";
+    }
+    else if(theta_i == ("Q"+num))
+    {
+        cosTheta = "c" + num;
+        sinTheta = "s" + num;
+    }
+    else if(theta_i == ("Q" + num + "-PI/2"))
+    {
+        cosTheta = "s" + num;
+        sinTheta = "(-c" + num + ")";
+    }
+    else if(theta_i == ("Q" + num + "+PI/2"))
+    {
+        cosTheta = "(-s" + num + ")";
+        sinTheta = "c" + num;
+    }
+
+
+    //filling the matrix by line
+    homogeneous_transformation[0][0] = cosTheta;
+    homogeneous_transformation[0][1] = "(-" + sinTheta + ")" + cosAlpha;
+    homogeneous_transformation[0][2] = sinTheta + sinAlpha;
+    homogeneous_transformation[0][3] = a_i + cosTheta;
+
+    homogeneous_transformation[1][0] = sinTheta;
+    homogeneous_transformation[1][1] = cosTheta + cosAlpha;
+    homogeneous_transformation[1][2] = "(-" + cosTheta + ")" + sinAlpha;
+    homogeneous_transformation[1][3] = a_i + sinTheta;
+
     homogeneous_transformation[2][0] = "0";
+    homogeneous_transformation[2][1] = sinAlpha;
+    homogeneous_transformation[2][2] = cosAlpha;
+    homogeneous_transformation[2][3] = d_i;
+
     homogeneous_transformation[3][0] = "0";
-
-
-    //2nd and 3rd colonn
-    if(this->alpha_i == "0")
-    {
-        homogeneous_transformation[0][1] = "-s" + to_string(this->getNumSolid()+1);
-        homogeneous_transformation[1][1] = "c" + to_string(this->getNumSolid()+1);
-        homogeneous_transformation[2][1] = "0";
-
-        homogeneous_transformation[0][2] = "0";
-        homogeneous_transformation[1][2] = "0";
-        homogeneous_transformation[2][2] = "1";
-    }
-    else if(this->alpha_i == "+PI/2")
-    {
-        homogeneous_transformation[0][1] = "0";
-        homogeneous_transformation[1][1] = "0";
-        homogeneous_transformation[2][1] = "1";
-
-        homogeneous_transformation[0][2] = "s" + to_string(this->getNumSolid()+1);
-        homogeneous_transformation[1][2] = "-c" + to_string(this->getNumSolid()+1);
-        homogeneous_transformation[2][2] = "0";
-    }
-    else if(this->alpha_i == "-PI/2")
-    {
-        homogeneous_transformation[0][1] = "0";
-        homogeneous_transformation[1][1] = "0";
-        homogeneous_transformation[2][1] = "-1";
-
-        homogeneous_transformation[0][2] = "-s" + to_string(this->getNumSolid()+1);
-        homogeneous_transformation[1][2] = "c" + to_string(this->getNumSolid()+1);
-        homogeneous_transformation[2][2] = "0";
-    }
     homogeneous_transformation[3][1] = "0";
     homogeneous_transformation[3][2] = "0";
-
-
-    //4th colonn
-    if(this->a_i == "0")
-    {
-        homogeneous_transformation[0][3] = "0";
-        homogeneous_transformation[1][3] = "0";
-    }
-    else
-    {
-        homogeneous_transformation[0][3] = this->a_i + "c" + to_string(this->getNumSolid()+1);
-        homogeneous_transformation[1][3] = this->a_i + "s" + to_string(this->getNumSolid()+1);
-    }
-    homogeneous_transformation[2][3] = this->d_i;
     homogeneous_transformation[3][3] = "1";
 }
 

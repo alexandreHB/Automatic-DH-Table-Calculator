@@ -2,12 +2,16 @@ TODO LIST
 
 related to the code :  
 
-1) retravailler sur l'initialisation de la matrice d'un solide(elle est pas tjrs correcte)
-    j'pense faut regler le cas "Qi+-PI/2"
+*  retravailler sur l'initialisation de la matrice d'un solide(elle est pas tjrs correcte)
 
-2) retravailler sur la scalabilté des petites fonctions pour les matrices
+*  re travailler le computeDH (verfier les qulq cas ou ca marche pas trop)
 
-3) voir si dans le destructeur de solide faut pas delete la matrice
+
+*  Repenser l'interface pour voir quelles touches vont avec quelles nouvelles fonctionalité 
+(mettre sur papier la liste des fonctionalités et reflechir a laquel on met en bouton et laquel en touche de clavier)
+
+
+*  voir si dans le destructeur de solide faut pas delete la matrice
 
 
 Bonus : 
