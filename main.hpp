@@ -7,6 +7,8 @@
 #include <SDL2/SDL_ttf.h>
 
 using namespace std;
+#include <bits/stdc++.h>
+#include <algorithm>
 #include <memory>
 #include <vector>
 #include <cstring>

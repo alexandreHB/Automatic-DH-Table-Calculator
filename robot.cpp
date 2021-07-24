@@ -91,24 +91,71 @@ void Robot::computeMatrices()
         listeSolid[i]->computeMatrix();
 }
 
+void Robot::cleanMatrices() 
+{
+    for(int i = 1; i < listeSolid.size()-1; i++)
+        listeSolid[i]->cleanMatrix();
+}
+
 void Robot::printMatrices() 
 {
     for(int i = 1; i < listeSolid.size()-1; i++)
     {
         cout << "___________________________________________________________" << endl;
         cout << "Homogeneous Transformation Matrix from solid " << i-1 << " to solid " << i << " : \n" << endl;
-        listeSolid[i]->printMatrix();
+        //listeSolid[i]->printMatrix();
+        printMatrix(this->listeSolid[i]->homogeneous_transformation);
+        cout << " " << endl;
     }
 }
 
+void Robot::matrixProduct(shared_ptr<Solid> next_solid) 
+{
+    string res[4][4];
+    for(int i = 0; i < 4; i++)
+        for(int j = 0; j < 4; j++)
+        {
+            res[i][j] = " ";
+            for(int k = 0; k < 4; k++)
+            {
+                if(k != 0)
+                    res[i][j] += "+";
+
+                res[i][j] += this->geometrical_model[i][k] + next_solid->homogeneous_transformation[k][j];
+            }
+        }
+
+        for(int l = 0; l < 4; l++)
+            for(int m = 0; m < 4; m++)
+                this->geometrical_model[l][m] = res[l][m];
+}
 
 
-/*
 void Robot::computeGeometricalModel() 
 {
+    this->computeMatrices();
+    this->cleanMatrices();
+    this->printMatrices();
 
+/*
+    for(int i = 0; i < 4; i++)
+        for(int j = 0; j < 4; j++)
+            this->geometrical_model[i][j] = this->listeSolid[1]->homogeneous_transformation[i][j];
+
+
+
+    for(int k = 1; k < listeSolid.size()-1; k++)
+    {
+        this->matrixProduct(this->listeSolid[k+1]);
+
+        cout << "___________________________________________________________" << endl;
+        cout << "Homogeneous Transformation Matrix from solid " << 0 << " to solid " << k << " : \n" << endl;
+        printMatrix(geometrical_model);
+        cout << " " << endl;
+    }
+    */
 }
-*/
+
 
 
 

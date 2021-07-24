@@ -2,7 +2,7 @@ TODO LIST
 
 related to the code :  
 
-*  retravailler sur l'initialisation de la matrice d'un solide(elle est pas tjrs correcte)
+* finir le scale des produits de matrices
 
 *  re travailler le computeDH (verfier les qulq cas ou ca marche pas trop)
 

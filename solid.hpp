@@ -56,9 +56,12 @@ class Solid
 
         //homegeneous transformation matrix
         void computeMatrix();
-        void printMatrix(); 
-        void matrixProduct(shared_ptr<Solid> next_solid);
+        //void matrixProduct(shared_ptr<Solid> next_solid);
+        void cleanMatrix();
 };
+
+void printMatrix(string matrix[4][4]);
+void cleanString(string& s);
 
 
 #endif

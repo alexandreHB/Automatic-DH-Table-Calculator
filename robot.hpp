@@ -13,6 +13,7 @@ class Robot
 {
     public :
         vector<shared_ptr<Solid>> listeSolid; 
+        string geometrical_model[4][4];
         
         Robot(SDL_Renderer* pRenderer);
         ~Robot();
@@ -23,7 +24,9 @@ class Robot
         void printDH_Table();
 
         void computeMatrices();
+        void cleanMatrices();
         void printMatrices();
+        void matrixProduct(shared_ptr<Solid> next_solid);
         void computeGeometricalModel();
 
 };

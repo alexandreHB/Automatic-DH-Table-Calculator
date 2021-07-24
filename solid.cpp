@@ -289,22 +289,24 @@ void Solid::computeMatrix()
 }
 
 
-void Solid::printMatrix() 
+
+
+void printMatrix(string matrix[4][4]) 
 {
     for(int i = 0; i < 4; i++)
     {
         cout << "|";
         for (int j = 0; j < 4; j++)
         {
-            cout << "   " << homogeneous_transformation[i][j];
-            for(int k = 0; k < 28 - homogeneous_transformation[i][j].size(); k++)
+            cout << "   " << matrix[i][j];
+            for(int k = 0; k < 28 - matrix[i][j].size(); k++)
                 cout << " ";
         }
         cout << "| " << endl;
     }
 }
 
-
+/*
 void Solid::matrixProduct(shared_ptr<Solid> next_solid)
 {
     string res[4][4];
@@ -320,17 +322,41 @@ void Solid::matrixProduct(shared_ptr<Solid> next_solid)
                 res[i][j] += this->homogeneous_transformation[i][k] + next_solid->homogeneous_transformation[k][j];
             }
         }
-
-        for(int i = 0; i < 4; i++)
-        {
-            cout << "|";
-            for (int j = 0; j < 4; j++)
-            {
-                cout << "   " << res[i][j];
-                for(int k = 0; k < 28 - res[i][j].size(); k++)
-                    cout << " ";
-            }
-            cout << "| " << endl;
-        }
 }
+*/
+
+void cleanString(string& s) 
+{
+    int found = s.find("0");
+    if(found >= 0)
+        s = "0";
+    
+    int n = count(s.begin(), s.end(), '(');
+    s.erase(remove(s.begin(), s.end(), '('), s.end());
+    s.erase(remove(s.begin(), s.end(), ')'), s.end());
+    s.erase(remove(s.begin(), s.end(), '-'), s.end());
+
+    if(n%2 == 1)
+        s = '-' + s;
+
+    for(int i = 0; i < s.size()-1 ; i++)
+    {
+        if(s.at(i+1) == '1')
+            if((s.at(i) == '0' || s.at(i) == '1' || s.at(i) == '2' || s.at(i) == '3' || s.at(i) == '4' || s.at(i) == '5' 
+                || s.at(i) == '6' || s.at(i) == '7' || s.at(i) == '8' || s.at(i) == '9'))
+                s.erase(i+1, 1);
+    }
+}
+
+void Solid::cleanMatrix() 
+{
+    for(int i = 0; i < 4; i++)
+        for(int j = 0; j < 4; j++)
+            cleanString(homogeneous_transformation[i][j]);
+}
+
+
+
+
+
 
