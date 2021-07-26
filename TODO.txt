@@ -2,9 +2,13 @@ TODO LIST
 
 related to the code :  
 
-* finir le scale des produits de matrices
+* faire des test pour voir que clean string marche bien
+    ==> finir le scale des produits de matrices
+
+==> commencer la 3D
 
 *  re travailler le computeDH (verfier les qulq cas ou ca marche pas trop)
+    ==> d'abbord on commence la 3D car en soit le compute DH sera plus pertiant et plus facile en 3D
 
 
 *  Repenser l'interface pour voir quelles touches vont avec quelles nouvelles fonctionalité 

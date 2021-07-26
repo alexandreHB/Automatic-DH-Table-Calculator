@@ -18,6 +18,12 @@ int main()
     int solid_selected = -2;        //last solid selected by clicking on it
     bool isOpen = true;             //does the application is open or not
 
+
+    string s1 = "c1l21+(-s1)1l20+S10l2+l1c11";
+    cout << "avant traitement : " << s1 << endl;
+    cleanString(s1);
+    cout << "apres traitement : " << s1 << endl;
+
     while (isOpen)  
     {
         while (SDL_PollEvent(&interface.events))
@@ -82,7 +88,7 @@ int main()
                     {
                         robot.computeDH_Table();
                         robot.printDH_Table();
-                        robot.computeGeometricalModel();
+                        //robot.computeGeometricalModel();
                     }
                     break;
 

@@ -61,7 +61,9 @@ class Solid
 };
 
 void printMatrix(string matrix[4][4]);
+void printSansModif(string matrix[4][4]);
 void cleanString(string& s);
+string** matrixProduct(string m1[4][4], string m2[4][4]);
 
 
 #endif

@@ -293,18 +293,68 @@ void Solid::computeMatrix()
 
 void printMatrix(string matrix[4][4]) 
 {
+    string res[4][4];
+    //pre treatment of the string to be more visual
+    for(int m = 0; m < 4; m++)
+        for(int n = 0; n < 4 ; n++)
+        {
+            string s = matrix[m][n];
+
+            int found = s.find("0");
+            if(found >= 0)
+                s = "0";
+            
+            int x = count(s.begin(), s.end(), '(');
+            s.erase(remove(s.begin(), s.end(), '('), s.end());
+            s.erase(remove(s.begin(), s.end(), ')'), s.end());
+            s.erase(remove(s.begin(), s.end(), '-'), s.end());
+
+            if(x%2 == 1)
+                s = '-' + s;
+
+            for(int i = 0; i < s.size()-1 ; i++)
+            {
+                if(s.at(i+1) == '1')
+                    if((s.at(i) == '0' || s.at(i) == '1' || s.at(i) == '2' || s.at(i) == '3' || s.at(i) == '4' || s.at(i) == '5' 
+                        || s.at(i) == '6' || s.at(i) == '7' || s.at(i) == '8' || s.at(i) == '9'))
+                        s.erase(i+1, 1);
+            }
+            res[m][n] = s;
+        }
+
+
+
+    //print the res matrix which stays in the scope of the function
     for(int i = 0; i < 4; i++)
     {
         cout << "|";
         for (int j = 0; j < 4; j++)
         {
-            cout << "   " << matrix[i][j];
-            for(int k = 0; k < 28 - matrix[i][j].size(); k++)
+            //cout << "   " << matrix[i][j];
+            cout << "   " << res[i][j];
+            //for(int k = 0; k < 28 - matrix[i][j].size(); k++)
+            for(int k = 0; k < 28 - res[i][j].size(); k++)
                 cout << " ";
         }
         cout << "| " << endl;
     }
 }
+
+void printSansModif(string matrix[4][4]) 
+{
+    for(int i = 0; i < 4; i++)
+    {
+        cout << '|';
+        for (int j = 0; j < 4; j++)
+        {
+            cout << "   " << matrix[i][j];
+            for(int k = 0; k < 28 - matrix[i][j].size(); k++)
+                cout << ' ';
+        }
+        cout << "| " << endl;
+    }
+}
+
 
 /*
 void Solid::matrixProduct(shared_ptr<Solid> next_solid)
@@ -325,12 +375,40 @@ void Solid::matrixProduct(shared_ptr<Solid> next_solid)
 }
 */
 
+/*
+c10+l11 -> l1
+*/
 void cleanString(string& s) 
 {
-    int found = s.find("0");
-    if(found >= 0)
+    /*
+    int foundZero = s.find("0");
+    if(foundZero >= 0)
         s = "0";
-    
+    */
+
+    int begin = 0;
+    int end;
+
+    //deletion of terms that equals to 0
+    for(int i = 0; i < s.size(); i++)
+    {
+        begin = i;
+        end = s.find_first_of("+", begin);
+
+        if(begin == end)
+            end = s.find_first_of("+", begin+1);
+
+        if(s.find("0") > begin && s.find("0") < end)    //if there is a 0 betwen the +'s
+        {
+            s.at(begin) = '+';
+            for(int j = begin+1; j <= end; j++)
+                    s.at(j) = 'X';
+        }
+        else if (s.find("0") == -1)
+            break;
+    }
+    s.erase(remove(s.begin(), s.end(), 'X'), s.end());
+
     int n = count(s.begin(), s.end(), '(');
     s.erase(remove(s.begin(), s.end(), '('), s.end());
     s.erase(remove(s.begin(), s.end(), ')'), s.end());
@@ -339,6 +417,7 @@ void cleanString(string& s)
     if(n%2 == 1)
         s = '-' + s;
 
+    //deletion of x1 multiplication
     for(int i = 0; i < s.size()-1 ; i++)
     {
         if(s.at(i+1) == '1')
@@ -346,14 +425,54 @@ void cleanString(string& s)
                 || s.at(i) == '6' || s.at(i) == '7' || s.at(i) == '8' || s.at(i) == '9'))
                 s.erase(i+1, 1);
     }
+
+    //deletion of 2 signs in a row
+    for(int i = 0; i < s.size()-1 ; i++)
+    {
+        if(s.at(i) == '+')
+            if(s.at(i+1) == '+' || s.at(i+1) == '-')
+                s.erase(i, 1);
+    }
 }
 
+
+string** matrixProduct(string m1[4][4], string m2[4][4]) 
+{
+    string res[4][4];
+    for(int i = 0; i < 4; i++)
+        for(int j = 0; j < 4; j++)
+        {
+            res[i][j] = " ";
+            for(int k = 0; k < 4; k++)
+            {
+                if(k != 0)
+                    res[i][j] += "+";
+
+                res[i][j] += m1[i][k] + m2[k][j];
+            }
+        }
+
+    string** p_res = new string*[4];
+    for (int i = 0; i < 4; i++) {
+        p_res[i] = new string[4];
+    }
+
+    for(int i = 0; i < 4; i++)
+        for(int j = 0; j < 4; j++)
+            p_res[i][j] = res[i][j];
+
+    return p_res;
+}
+
+
+/*
 void Solid::cleanMatrix() 
 {
     for(int i = 0; i < 4; i++)
         for(int j = 0; j < 4; j++)
             cleanString(homogeneous_transformation[i][j]);
 }
+*/
 
 
 

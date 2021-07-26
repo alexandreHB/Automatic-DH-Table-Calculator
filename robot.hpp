@@ -24,11 +24,10 @@ class Robot
         void printDH_Table();
 
         void computeMatrices();
-        void cleanMatrices();
+        //void cleanMatrices();
         void printMatrices();
-        void matrixProduct(shared_ptr<Solid> next_solid);
+        //void matrixProduct(shared_ptr<Solid> next_solid);
         void computeGeometricalModel();
-
 };
 
 #endif
