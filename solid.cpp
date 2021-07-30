@@ -375,64 +375,139 @@ void Solid::matrixProduct(shared_ptr<Solid> next_solid)
 }
 */
 
-/*
-c10+l11 -> l1
-*/
 void cleanString(string& s) 
 {
-    /*
-    int foundZero = s.find("0");
-    if(foundZero >= 0)
-        s = "0";
-    */
+    int begin = s.find('+');
+    int end = s.find_last_of('+');
 
-    int begin = 0;
-    int end;
-
-    //deletion of terms that equals to 0
-    for(int i = 0; i < s.size(); i++)
+    // 1) Replace the first term by 'X's if it's equal to 0 
+    if(s.find('0') < begin && s.find('0') != -1)
+        for(int i = 0; i < begin; i++)
+            s.at(i) = 'X';
+    
+    // 2) Replace the last term by 'X's if it's equal to 0 
+    if(s.find_last_of('0') > end && s.find('0') != -1)
+        for(int i = end+1; i < s.size(); i++)
+            s.at(i) = 'X';
+    
+    // 3) Replace the terms between the first and the last '+' by 'X's if they are equal to 0 
+    int sub_begin = begin;
+    int sub_end = s.find('+', sub_begin+1); 
+    while(sub_begin != -1 && sub_end !=-1)
     {
-        begin = i;
-        end = s.find_first_of("+", begin);
+        if(s.find('0', sub_begin) > sub_begin && s.find('0', sub_begin) < sub_end && s.find('0') != -1)
+            for(int i = sub_begin+1; i < sub_end; i++)
+                s.at(i) = 'X';
 
-        if(begin == end)
-            end = s.find_first_of("+", begin+1);
-
-        if(s.find("0") > begin && s.find("0") < end)    //if there is a 0 betwen the +'s
-        {
-            s.at(begin) = '+';
-            for(int j = begin+1; j <= end; j++)
-                    s.at(j) = 'X';
-        }
-        else if (s.find("0") == -1)
-            break;
+        sub_begin = s.find('+', sub_begin+1);
+        sub_end = s.find('+', sub_end+1);
     }
+
+    // 4) Delete the 'X's
     s.erase(remove(s.begin(), s.end(), 'X'), s.end());
 
-    int n = count(s.begin(), s.end(), '(');
-    s.erase(remove(s.begin(), s.end(), '('), s.end());
-    s.erase(remove(s.begin(), s.end(), ')'), s.end());
-    s.erase(remove(s.begin(), s.end(), '-'), s.end());
-
-    if(n%2 == 1)
-        s = '-' + s;
-
-    //deletion of x1 multiplication
-    for(int i = 0; i < s.size()-1 ; i++)
+    // 5) Delete several '+' in a row and the last + without terms
+    bool hadToDelete = false;
+    for(int i = 0; i < s.size()-1; i++)
     {
+        if(s.at(i) == '+' && s.at(i+1) == '+')
+            hadToDelete = true;   
+
+        if(hadToDelete)
+        {
+            s.erase(s.begin()+i+1);
+            i--;
+        }
+    hadToDelete = false;
+    }
+    if(s.at(s.size()-1) == '+')
+        s.erase(s.size()-1);
+
+    // 6) Deletion of x1 multiplication
+    for(int i = 0; i < s.size()-1 ; i++)
         if(s.at(i+1) == '1')
             if((s.at(i) == '0' || s.at(i) == '1' || s.at(i) == '2' || s.at(i) == '3' || s.at(i) == '4' || s.at(i) == '5' 
-                || s.at(i) == '6' || s.at(i) == '7' || s.at(i) == '8' || s.at(i) == '9'))
-                s.erase(i+1, 1);
+                || s.at(i) == '6' || s.at(i) == '7' || s.at(i) == '8' || s.at(i) == '9' || s.at(i) == ')'))
+                    s.erase(s.begin()+i+1);
+
+    cout << "pour l'instant : " << s << endl; 
+
+    // 7) Simplifation of each term of the summ: treatment of  - and  (  ) betwen the first and the last +
+    sub_begin = s.find('+');
+    sub_end = s.find('+', sub_begin+1); 
+    int numberOfMinus = 2;
+    //string temp;
+    while(sub_end !=-1)
+    {
+        cout << "sub_begin : " << sub_begin << endl;
+        cout << "sub_end : " << sub_end << endl;
+        cout << "avant traitement : " << endl;
+        cout << s.substr(sub_begin+1, sub_end-sub_begin-1) << endl;
+        
+        
+        numberOfMinus = count(s.begin()+sub_begin, s.begin()+sub_end, '(');
+        s.erase(remove(s.begin()+sub_begin, s.begin()+sub_end, '('), s.begin()+sub_end);
+        s.erase(remove(s.begin()+sub_begin, s.begin()+sub_end, '-'), s.begin()+sub_end);
+        s.erase(remove(s.begin()+sub_begin, s.begin()+sub_end, ')'), s.begin()+sub_end);
+
+        //cout << "number of ( : " << numberOfMinus << endl;
+        if(numberOfMinus%2 == 1 || sub_end-sub_end == 2)
+        {
+            s.insert(s.begin()+sub_begin+1, '-');
+            //s.erase(s.begin()+sub_begin);
+        }
+
+        cout << "apres traitement : " << endl;
+        cout << s.substr(sub_begin+1, sub_end-sub_begin-1) << endl;
+
+        sub_begin = s.find('+', sub_begin+1);
+        sub_end = s.find('+', sub_end+1);
+        
     }
 
-    //deletion of 2 signs in a row
-    for(int i = 0; i < s.size()-1 ; i++)
+
+    // 8) Simplifation of each term of the summ: treatment of  - and  (  ) before the first +
+    begin = 5;
+    numberOfMinus = count(s.begin(), s.begin()+begin, '(');
+
+    s.erase(remove(s.begin(), s.begin()+begin-1, '('), s.begin()+begin-1);
+    s.erase(remove(s.begin(), s.begin()+begin-1, '-'), s.begin()+begin-1);
+    s.erase(remove(s.begin(), s.begin()+begin-1, ')'), s.begin()+begin-1);
+
+    if(numberOfMinus%2 == 1)
+        s.insert(s.begin(),'-');
+
+
+    cout << "pour l'instant : " << s << endl;
+    // 9) Simplifation of each term of the summ: treatment of  - and  (  ) before the first +
+    end = s.find_last_of('+');
+    numberOfMinus = count(s.begin()+end, s.end(), '(');
+    s.erase(remove(s.begin()+end, s.end(), '('), s.end());
+    s.erase(remove(s.begin()+end, s.end(), '-'), s.end());
+    s.erase(remove(s.begin()+end, s.end(), ')'), s.end());
+
+    if(numberOfMinus%2 == 1)
+        s.insert(s.begin()+end+1,'-');
+    
+    
+    // 10) Delete the + when a - is following
+    hadToDelete = false;
+    for(int i = 0; i < s.size()-1; i++)
     {
-        if(s.at(i) == '+')
-            if(s.at(i+1) == '+' || s.at(i+1) == '-')
-                s.erase(i, 1);
+        if(s.at(i) == '+' && s.at(i+1) == '-')
+            hadToDelete = true;   
+
+        if(hadToDelete)
+        {
+            s.erase(s.begin()+i);
+            i--;
+        }
+    hadToDelete = false;
     }
+
+
+        
+    
 }
 
 

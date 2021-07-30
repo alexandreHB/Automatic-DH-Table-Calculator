@@ -2,8 +2,9 @@ TODO LIST
 
 related to the code :  
 
-* faire des test pour voir que clean string marche bien
-    ==> finir le scale des produits de matrices
+* continuer de travailler su le clean de matrice 
+
+pou l'instant ca marche sur des gros termes, gerer le cas ou il n'y a qu'un terme
 
 ==> commencer la 3D
 

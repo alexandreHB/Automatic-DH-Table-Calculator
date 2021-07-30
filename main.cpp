@@ -19,10 +19,18 @@ int main()
     bool isOpen = true;             //does the application is open or not
 
 
-    string s1 = "c1l21+(-s1)1l20+S10l2+l1c11";
+    string s1 = "(-c1)1+(-s1)10+s100+l1c10+l1(-s2)+0s2(-c1)+l1(-c1)+0s1+l1+l2+(-c1)+(-s1)+01";
     cout << "avant traitement : " << s1 << endl;
     cleanString(s1);
     cout << "apres traitement : " << s1 << endl;
+
+    /*
+    string s2 = "l1(-c1)";
+    cout << "avant traitement : " << s2 << endl;
+    cleanString(s2);
+    cout << "apres traitement : " << s2 << endl;
+    */
+    
 
     while (isOpen)  
     {
