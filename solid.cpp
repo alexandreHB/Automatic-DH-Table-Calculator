@@ -379,6 +379,24 @@ void cleanString(string& s)
 {
     int begin = s.find('+');
     int end = s.find_last_of('+');
+    int numberOfMinus;
+
+    if(begin == -1)
+    {
+        if(count(s.begin(), s.end(), '0') >= 1)
+            s = "0";
+        else
+        {
+            numberOfMinus = count(s.begin(), s.end(), '(');
+            s.erase(remove(s.begin(), s.end(), '('), s.end());
+            s.erase(remove(s.begin(), s.end(), '-'), s.end());
+            s.erase(remove(s.begin(), s.end(), ')'), s.end());
+
+            if(numberOfMinus % 2 == 1)
+                s.insert(s.begin(), '-');
+        }
+        return;
+    }
 
     // 1) Replace the first term by 'X's if it's equal to 0 
     if(s.find('0') < begin && s.find('0') != -1)
@@ -435,8 +453,6 @@ void cleanString(string& s)
     // 7) Simplifation of each term of the summ: treatment of  - and  (  ) betwen the first and the last +
     sub_begin = s.find('+');
     sub_end = s.find('+', sub_begin+1); 
-    int numberOfMinus = 2;
-    //string temp;
     while(sub_end !=-1)
     {
         cout << "sub_begin : " << sub_begin << endl;
