@@ -2,9 +2,7 @@ TODO LIST
 
 related to the code :  
 
-* continuer de travailler su le clean de matrice 
-
-pou l'instant ca marche sur des gros termes, gerer le cas ou il n'y a qu'un terme
+* relire un bon coup le code pour le rendre plus propre et plus claire et verifier que ca marche bien
 
 ==> commencer la 3D
 

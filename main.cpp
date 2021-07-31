@@ -18,22 +18,6 @@ int main()
     int solid_selected = -2;        //last solid selected by clicking on it
     bool isOpen = true;             //does the application is open or not
 
-/*
-    string s1 = "(-c1)1+(-s1)10+s100+l1c10+l1(-s2)+0s2(-c1)+l1(-c1)+0s1+l1+l2+(-c1)+(-s1)+01";
-    cout << "avant traitement : " << s1 << endl;
-    cleanString(s1);
-    cout << "apres traitement : " << s1 << endl;
-*/
-    
-    /*
-    string s2 = "l1(-c1)";
-    cout << "avant traitement : " << s2 << endl;
-    cleanString(s2);
-    cout << "apres traitement : " << s2 << endl;
-    */
-    
-    
-
     while (isOpen)  
     {
         while (SDL_PollEvent(&interface.events))
@@ -67,13 +51,10 @@ int main()
                     //CHANGE OF SOLID'S TEXTURE
                     if (interface.events.key.keysym.sym == SDLK_c && solid_selected != -2)
                         robot.listeSolid[solid_selected+1]->changeTexture(interface.pRenderer);                  
-                    /*
+                    
                     //TEST
                     if (interface.events.key.keysym.sym == SDLK_t)
-                    {
-                        
-                    }
-                    */
+                    {}
                     break;
                     
                 case SDL_MOUSEBUTTONDOWN:
@@ -98,7 +79,7 @@ int main()
                     {
                         robot.computeDH_Table();
                         robot.printDH_Table();
-                        //robot.computeGeometricalModel();
+                        robot.computeGeometricalModel();
                     }
                     break;
 

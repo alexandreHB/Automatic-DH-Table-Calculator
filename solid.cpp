@@ -290,8 +290,23 @@ void Solid::computeMatrix()
 
 
 
-
 void printMatrix(string matrix[4][4]) 
+{
+    for(int i = 0; i < 4; i++)
+    {
+        cout << '|';
+        for (int j = 0; j < 4; j++)
+        {
+            cout << "   " << matrix[i][j];
+            for(int k = 0; k < 45 - matrix[i][j].size(); k++)
+                cout << ' ';
+        }
+        cout << "| " << endl;
+    }
+}
+
+/*
+void printCleanMatrix(string matrix[4][4]) 
 {
     string res[4][4];
     //pre treatment of the string to be more visual
@@ -339,41 +354,8 @@ void printMatrix(string matrix[4][4])
         cout << "| " << endl;
     }
 }
-
-void printSansModif(string matrix[4][4]) 
-{
-    for(int i = 0; i < 4; i++)
-    {
-        cout << '|';
-        for (int j = 0; j < 4; j++)
-        {
-            cout << "   " << matrix[i][j];
-            for(int k = 0; k < 28 - matrix[i][j].size(); k++)
-                cout << ' ';
-        }
-        cout << "| " << endl;
-    }
-}
-
-
-/*
-void Solid::matrixProduct(shared_ptr<Solid> next_solid)
-{
-    string res[4][4];
-    for(int i = 0; i < 4; i++)
-        for(int j = 0; j < 4; j++)
-        {
-            res[i][j] = " ";
-            for(int k = 0; k < 4; k++)
-            {
-                if(k != 0)
-                    res[i][j] += "+";
-
-                res[i][j] += this->homogeneous_transformation[i][k] + next_solid->homogeneous_transformation[k][j];
-            }
-        }
-}
 */
+
 
 void cleanString(string& s) 
 {
@@ -387,14 +369,21 @@ void cleanString(string& s)
             s = "0";
         else
         {
-            numberOfMinus = count(s.begin(), s.end(), '(');
+            numberOfMinus = count(s.begin(), s.end(), '-');
             s.erase(remove(s.begin(), s.end(), '('), s.end());
             s.erase(remove(s.begin(), s.end(), '-'), s.end());
             s.erase(remove(s.begin(), s.end(), ')'), s.end());
 
             if(numberOfMinus % 2 == 1)
                 s.insert(s.begin(), '-');
+
+            for(int i = 0; i < s.size()-1 ; i++)
+                if(s.at(i+1) == '1')
+                    if((s.at(i) == '0' || s.at(i) == '1' || s.at(i) == '2' || s.at(i) == '3' || s.at(i) == '4' || s.at(i) == '5' 
+                        || s.at(i) == '6' || s.at(i) == '7' || s.at(i) == '8' || s.at(i) == '9' || s.at(i) == ')'))
+                            s.erase(s.begin()+i+1);
         }
+        
         return;
     }
 
@@ -424,6 +413,13 @@ void cleanString(string& s)
     // 4) Delete the 'X's
     s.erase(remove(s.begin(), s.end(), 'X'), s.end());
 
+    //if all terms of the summ are equal to 0
+    if(count(s.begin(), s.end(),'+') == s.size())
+    {
+        s = "0";
+        return;
+    }
+
     // 5) Delete several '+' in a row and the last + without terms
     bool hadToDelete = false;
     for(int i = 0; i < s.size()-1; i++)
@@ -444,43 +440,26 @@ void cleanString(string& s)
     // 6) Deletion of x1 multiplication
     for(int i = 0; i < s.size()-1 ; i++)
         if(s.at(i+1) == '1')
-            if((s.at(i) == '0' || s.at(i) == '1' || s.at(i) == '2' || s.at(i) == '3' || s.at(i) == '4' || s.at(i) == '5' 
-                || s.at(i) == '6' || s.at(i) == '7' || s.at(i) == '8' || s.at(i) == '9' || s.at(i) == ')'))
+            if(s.at(i) == '0' || s.at(i) == '1' || s.at(i) == '2' || s.at(i) == '3' || s.at(i) == '4' || s.at(i) == '5' 
+                || s.at(i) == '6' || s.at(i) == '7' || s.at(i) == '8' || s.at(i) == '9' || s.at(i) == ')' || s.at(i) == '-' || s.at(i) == '+')
                     s.erase(s.begin()+i+1);
-
-    cout << "pour l'instant : " << s << endl; 
 
     // 7) Simplifation of each term of the summ: treatment of  - and  (  ) betwen the first and the last +
     sub_begin = s.find('+');
     sub_end = s.find('+', sub_begin+1); 
     while(sub_end !=-1)
     {
-        cout << "sub_begin : " << sub_begin << endl;
-        cout << "sub_end : " << sub_end << endl;
-        cout << "avant traitement : " << endl;
-        cout << s.substr(sub_begin+1, sub_end-sub_begin-1) << endl;
-        
-        
         numberOfMinus = count(s.begin()+sub_begin, s.begin()+sub_end, '(');
         s.erase(remove(s.begin()+sub_begin, s.begin()+sub_end, '('), s.begin()+sub_end);
         s.erase(remove(s.begin()+sub_begin, s.begin()+sub_end, '-'), s.begin()+sub_end);
         s.erase(remove(s.begin()+sub_begin, s.begin()+sub_end, ')'), s.begin()+sub_end);
 
-        //cout << "number of ( : " << numberOfMinus << endl;
         if(numberOfMinus%2 == 1 || sub_end-sub_end == 2)
-        {
             s.insert(s.begin()+sub_begin+1, '-');
-            //s.erase(s.begin()+sub_begin);
-        }
-
-        cout << "apres traitement : " << endl;
-        cout << s.substr(sub_begin+1, sub_end-sub_begin-1) << endl;
 
         sub_begin = s.find('+', sub_begin+1);
         sub_end = s.find('+', sub_end+1);
-        
     }
-
 
     // 8) Simplifation of each term of the summ: treatment of  - and  (  ) before the first +
     begin = 5;
@@ -493,9 +472,7 @@ void cleanString(string& s)
     if(numberOfMinus%2 == 1)
         s.insert(s.begin(),'-');
 
-
-    cout << "pour l'instant : " << s << endl;
-    // 9) Simplifation of each term of the summ: treatment of  - and  (  ) before the first +
+    // 9) Simplifation of each term of the summ: treatment of  - and  (  ) after the last +
     end = s.find_last_of('+');
     numberOfMinus = count(s.begin()+end, s.end(), '(');
     s.erase(remove(s.begin()+end, s.end(), '('), s.end());
@@ -504,7 +481,6 @@ void cleanString(string& s)
 
     if(numberOfMinus%2 == 1)
         s.insert(s.begin()+end+1,'-');
-    
     
     // 10) Delete the + when a - is following
     hadToDelete = false;
@@ -520,12 +496,17 @@ void cleanString(string& s)
         }
     hadToDelete = false;
     }
-
-
-        
     
+    if(s.find('+') == 0)
+        s.erase(s.begin());
 }
 
+void cleanMatrix(string m[4][4])            
+{
+    for(int i = 0; i < 4; i++)
+        for(int j = 0; j < 4; j++)
+            cleanString(m[i][j]);
+}
 
 string** matrixProduct(string m1[4][4], string m2[4][4]) 
 {
@@ -554,16 +535,6 @@ string** matrixProduct(string m1[4][4], string m2[4][4])
 
     return p_res;
 }
-
-
-/*
-void Solid::cleanMatrix() 
-{
-    for(int i = 0; i < 4; i++)
-        for(int j = 0; j < 4; j++)
-            cleanString(homogeneous_transformation[i][j]);
-}
-*/
 
 
 
