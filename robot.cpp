@@ -113,11 +113,9 @@ void Robot::printMatrices()
 
 void Robot::computeGeometricalModel() 
 {
-    this->computeMatrices();        //compute tt les matrices T i-1->i
+    this->computeMatrices();
     this->cleanMatrices();
-    this->printMatrices();          //affiche la version propres des matrices sans alterer leur valeurs
-
-
+    this->printMatrices();
 
     //attriubution de T0->1 a GeoModel
     for(int i = 0; i < 4; i++)
@@ -134,24 +132,6 @@ void Robot::computeGeometricalModel()
     string** temp = new string*[4];
     for (int i = 0; i < 4; i++)
         temp[i] = new string[4];
-
-    /*// TEST DE LA MULTIPLICATION POUR T0->2
-    temp = matrixProduct(this->listeSolid[1]->homogeneous_transformation, this->listeSolid[2]->homogeneous_transformation);
-    for(int i = 0; i < 4; i++)
-        for(int j = 0; j < 4; j++)
-            geometrical_model[i][j] = temp[i][j];
-    */
-    
-    /*
-    cout << "___________________________________________________________" << endl;
-    cout << "Homogeneous Transformation Matrix from solid to solid 2 :\n" << endl;
-    //printMatrix(geometrical_model);
-    //cout << " " << endl;
-    cleanMatrix(geometrical_model);
-    printMatrix(geometrical_model);
-    cout << " " << endl;
-    */
-    
 
     for(int k = 2; k < listeSolid.size()-1; k++)
     {

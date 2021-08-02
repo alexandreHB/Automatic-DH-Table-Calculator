@@ -51,10 +51,6 @@ int main()
                     //CHANGE OF SOLID'S TEXTURE
                     if (interface.events.key.keysym.sym == SDLK_c && solid_selected != -2)
                         robot.listeSolid[solid_selected+1]->changeTexture(interface.pRenderer);                  
-                    
-                    //TEST
-                    if (interface.events.key.keysym.sym == SDLK_t)
-                    {}
                     break;
                     
                 case SDL_MOUSEBUTTONDOWN:

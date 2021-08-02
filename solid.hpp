@@ -60,14 +60,7 @@ class Solid
 
 void printMatrix(string matrix[4][4]);
 void cleanString(string& s);
-
-// modifie la matrice (je prefere cet option pour le moment)
 void cleanMatrix(string m[4][4]);
-
-//si on veut print sans modifier la matrice
-//void printCleanMatrix(string matrix[4][4]);
-
 string** matrixProduct(string m1[4][4], string m2[4][4]);
-
 
 #endif
